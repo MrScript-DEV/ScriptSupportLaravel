@@ -5,23 +5,24 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Http\Services\UserService;
 
 class UserController extends Controller
 {
+    public function __construct(private UserService $_userService) {}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $users = $this->_userService->getUsers();
+            return UserResource::collection($users);
+        } catch (\Exception $e) {
+            throw ($e);
+        }
     }
 
     /**
@@ -29,7 +30,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $user = $this->_userService->storeUser($request);
+            return new UserResource($user);
+        } catch (\Exception $e) {
+            throw ($e);
+        }
     }
 
     /**
@@ -37,15 +43,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
+        try {
+            $user = $this->_userService->getUser($user);
+            return new UserResource($user);
+        } catch (\Exception $e) {
+            throw ($e);
+        }
     }
 
     /**
@@ -53,7 +56,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        try {
+            $user = $this->_userService->updateUser($request, $user);
+            return new UserResource($user);
+        } catch (\Exception $e) {
+            throw ($e);
+        }
     }
 
     /**

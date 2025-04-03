@@ -9,8 +9,8 @@ class TicketFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject' => $this->faker->sentence(),
-            'rating' => $this->faker->numberBetween(0,5),
+            'subject' => fake()->sentence(),
+            'rating' => fake()->numberBetween(0,5),
         ];
     }
 }
