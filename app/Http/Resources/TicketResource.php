@@ -21,6 +21,7 @@ class TicketResource extends JsonResource
                 'messages' => $this->messages,
             ];
         }
+
         return [];
     }
 }

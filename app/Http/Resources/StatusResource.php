@@ -16,6 +16,7 @@ class StatusResource extends JsonResource
                 'tickets' => $this->tickets,
             ];
         }
+
         return [];
     }
 }

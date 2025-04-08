@@ -2,12 +2,10 @@
 
 namespace Database\Factories;
 
-use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PriorityFactory extends Factory
 {
-
     public function definition(): array
     {
         return [

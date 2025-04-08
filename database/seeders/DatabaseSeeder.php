@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         $priorities = Priority::factory()->count(3)->create();
         $roles = Role::factory()->count(3)->create();
         $users = User::factory()->count(20)->create()
-                ->each(function($user) use ($roles) {
-                    $user->roles()->attach($roles->random()->id);
-                });
+            ->each(function ($user) use ($roles) {
+                $user->roles()->attach($roles->random()->id);
+            });
 
         Ticket::factory()->count(10)->create([
             'user_id' => $users->random()->id,

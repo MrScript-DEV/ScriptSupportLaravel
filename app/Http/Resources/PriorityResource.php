@@ -17,6 +17,7 @@ class PriorityResource extends JsonResource
                 'tickets' => $this->tickets,
             ];
         }
+
         return [];
     }
 }

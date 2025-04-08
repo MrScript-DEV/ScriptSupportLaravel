@@ -10,7 +10,7 @@ class TicketFactory extends Factory
     {
         return [
             'subject' => fake()->sentence(),
-            'rating' => fake()->numberBetween(0,5),
+            'rating' => fake()->numberBetween(0, 5),
         ];
     }
 }

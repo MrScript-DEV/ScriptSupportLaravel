@@ -19,6 +19,7 @@ class UserResource extends JsonResource
                 'tickets' => $this->tickets,
             ];
         }
+
         return [];
     }
 }

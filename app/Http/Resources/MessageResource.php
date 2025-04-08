@@ -17,6 +17,7 @@ class MessageResource extends JsonResource
                 'message' => $this->message,
             ];
         }
+
         return [];
     }
 }

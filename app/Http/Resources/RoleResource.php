@@ -16,6 +16,7 @@ class RoleResource extends JsonResource
                 'users' => $this->users,
             ];
         }
+
         return [];
     }
 }
