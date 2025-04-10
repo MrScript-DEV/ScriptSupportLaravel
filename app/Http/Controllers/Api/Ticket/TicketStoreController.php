@@ -32,7 +32,6 @@ class TicketStoreController extends BaseController
             DB::commit();
 
             return $this->sendResponse(message: __('OK'), result: new UserResource($user));
-
         } catch (\Exception $e) {
             DB::rollBack();
 

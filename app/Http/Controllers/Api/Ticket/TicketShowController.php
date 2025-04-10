@@ -16,12 +16,11 @@ class TicketShowController extends BaseController
         try {
             $ticket = Ticket::findOrFail($ticketId);
 
-            if (! isAdmin() || ! isSupport() || ! isOwner($ticket->user_id)) {
+            if (!isAdmin() || !isSupport() || !isOwner($ticket->user_id)) {
                 return $this->sendError(error: __('Non autorisé'), code: 403);
             }
 
             return $this->sendResponse(message: __('OK'), result: new TicketResource($ticket));
-
         } catch (\Exception $e) {
             if (app()->isLocal()) {
                 return $this->sendError(error: __('Une erreur est survenue..'), errorMessages: $e, code: 500);

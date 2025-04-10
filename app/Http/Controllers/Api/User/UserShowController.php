@@ -14,14 +14,13 @@ class UserShowController extends BaseController
     public function show(int $userId): JsonResponse
     {
         try {
-            if (! isAdmin() || ! isOwner($userId)) {
+            if (!isAdmin() || !isOwner($userId)) {
                 return $this->sendError(error: __('Non autorisé'), code: 403);
             }
 
             $user = User::findOrFail($userId);
 
             return $this->sendResponse(message: __('OK'), result: new UserResource($user));
-
         } catch (\Exception $e) {
             if (app()->isLocal()) {
                 return $this->sendError(error: __('Une erreur est survenue..'), errorMessages: $e, code: 500);

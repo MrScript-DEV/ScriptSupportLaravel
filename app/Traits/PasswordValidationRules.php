@@ -28,7 +28,7 @@ trait PasswordValidationRules
     /** @see https://github.com/bjeavons/zxcvbn-php */
     private function zxcvbnRule(string $value, \Closure $fail): void
     {
-        $score = (new Zxcvbn)->passwordStrength($value)['score'];
+        $score = (new Zxcvbn())->passwordStrength($value)['score'];
         if ($score < 3) {
             $fail(__('Pour votre sécurité, veuillez choisir un mot de passe plus complexe.'));
         }

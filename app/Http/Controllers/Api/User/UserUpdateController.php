@@ -19,7 +19,7 @@ class UserUpdateController extends BaseController
         DB::beginTransaction();
 
         try {
-            if (! isAdmin() || ! isOwner($userId)) {
+            if (!isAdmin() || !isOwner($userId)) {
                 return $this->sendError(error: __('Non autorisé'), code: 403);
             }
 
@@ -44,7 +44,6 @@ class UserUpdateController extends BaseController
             DB::commit();
 
             return $this->sendResponse(message: __('OK'), result: new UserResource($user));
-
         } catch (\Exception $e) {
             DB::rollBack();
 

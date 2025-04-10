@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // Save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
 
 return [

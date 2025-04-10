@@ -14,14 +14,13 @@ class UserIndexController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            if (! isAdmin()) {
+            if (!isAdmin()) {
                 return $this->sendError(error: __('Non autorisé'), code: 403);
             }
 
             $users = User::all();
 
             return $this->sendResponse(message: __('OK'), result: UserResource::collection($users));
-
         } catch (\Exception $e) {
             if (app()->isLocal()) {
                 return $this->sendError(error: __('Une erreur est survenue..'), errorMessages: $e, code: 500);

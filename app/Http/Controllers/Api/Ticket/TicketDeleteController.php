@@ -16,7 +16,7 @@ class TicketDeleteController extends BaseController
         DB::beginTransaction();
 
         try {
-            if (! isAdmin() || ! isSupport()) {
+            if (!isAdmin() || !isSupport()) {
                 return $this->sendError(error: __('Non autorisé'), code: 403);
             }
 
@@ -26,7 +26,6 @@ class TicketDeleteController extends BaseController
             DB::commit();
 
             return $this->sendResponse(message: __('OK'));
-
         } catch (\Exception $e) {
             DB::rollBack();
 

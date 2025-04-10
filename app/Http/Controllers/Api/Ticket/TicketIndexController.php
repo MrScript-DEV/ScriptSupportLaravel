@@ -14,14 +14,13 @@ class TicketIndexController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            if (! isAdmin() && ! isSupport()) {
+            if (!isAdmin() && !isSupport()) {
                 $tickets = Ticket::where('user_id', authenticatedUser()->id)->get();
             } else {
                 $tickets = Ticket::all();
             }
 
             return $this->sendResponse(message: __('OK'), result: TicketResource::collection($tickets));
-
         } catch (\Exception $e) {
             if (app()->isLocal()) {
                 return $this->sendError(error: __('Une erreur est survenue..'), errorMessages: $e, code: 500);

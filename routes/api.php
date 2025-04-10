@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\Api\Ticket\TicketDeleteController;
 use App\Http\Controllers\Api\Ticket\TicketIndexController;
 use App\Http\Controllers\Api\Ticket\TicketShowController;
