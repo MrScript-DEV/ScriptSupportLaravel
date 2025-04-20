@@ -13,8 +13,6 @@ class UserDeleteController extends BaseController
 {
     public function delete(int $userId): JsonResponse
     {
-        DB::beginTransaction();
-
         try {
             if (!isAdmin()) {
                 return $this->sendError(error: __('Non autorisé'), code: 403);
@@ -22,6 +20,7 @@ class UserDeleteController extends BaseController
 
             $user = User::findOrFail($userId);
 
+            DB::beginTransaction();
             $user->delete();
             DB::commit();
 

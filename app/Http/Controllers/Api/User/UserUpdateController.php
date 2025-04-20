@@ -16,8 +16,6 @@ class UserUpdateController extends BaseController
 {
     public function update(Request $request, int $userId): JsonResponse
     {
-        DB::beginTransaction();
-
         try {
             if (!isAdmin() || !isOwner($userId)) {
                 return $this->sendError(error: __('Non autorisé'), code: 403);
@@ -34,6 +32,8 @@ class UserUpdateController extends BaseController
             }
 
             $user = User::findOrFail($userId);
+
+            DB::beginTransaction();
 
             $user->update([
                 'first_name' => $request->input('first_name'),

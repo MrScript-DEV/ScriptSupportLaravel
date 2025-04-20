@@ -13,12 +13,12 @@ class TicketDeleteController extends BaseController
 {
     public function delete(int $ticketId): JsonResponse
     {
-        DB::beginTransaction();
-
         try {
             if (!isAdmin() || !isSupport()) {
                 return $this->sendError(error: __('Non autorisé'), code: 403);
             }
+
+            DB::beginTransaction();
 
             $ticket = User::findOrFail($ticketId);
 

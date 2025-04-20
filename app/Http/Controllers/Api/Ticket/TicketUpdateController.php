@@ -16,8 +16,6 @@ class TicketUpdateController extends BaseController
 {
     public function update(Request $request, int $ticketId): JsonResponse
     {
-        DB::beginTransaction();
-
         try {
             $ticket = Ticket::findOrFail($ticketId);
 
@@ -43,6 +41,7 @@ class TicketUpdateController extends BaseController
                 $data['assignable_to'] = $request->input('assignable_to') ?? null;
             }
 
+            DB::beginTransaction();
             $ticket->update($data);
             DB::commit();
 

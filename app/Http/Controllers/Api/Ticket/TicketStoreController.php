@@ -15,8 +15,6 @@ class TicketStoreController extends BaseController
 {
     public function store(Request $request): JsonResponse
     {
-        DB::beginTransaction();
-
         try {
             $validator = Validator::make($request->all(), [
                 'subject' => 'required|string|min:2|max:255',
@@ -26,6 +24,7 @@ class TicketStoreController extends BaseController
                 return $this->sendError(error: __('Erreur de validation :'), errorMessages: $validator->errors()->all(), code: 422);
             }
 
+            DB::beginTransaction();
             authenticatedUser()->tickets()->create([
                 'subject' => $request->input('subject'),
             ]);

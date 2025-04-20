@@ -21,8 +21,6 @@ class UserStoreController extends BaseController
 
     public function store(Request $request): JsonResponse
     {
-        DB::beginTransaction();
-
         try {
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string|min:2|max:255',
@@ -35,6 +33,7 @@ class UserStoreController extends BaseController
                 return $this->sendError(error: __('Erreur de validation :'), errorMessages: $validator->errors()->all(), code: 422);
             }
 
+            DB::beginTransaction();
             $user = User::create([
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
