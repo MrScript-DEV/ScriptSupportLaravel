@@ -17,6 +17,7 @@ return new class () extends Migration {
             $table->string('name');
             $table->unsignedInteger('level')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

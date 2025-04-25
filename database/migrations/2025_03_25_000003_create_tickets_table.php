@@ -21,6 +21,7 @@ return new class () extends Migration {
             $table->foreignId('status_id')->constrained();
             $table->integer('rating')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

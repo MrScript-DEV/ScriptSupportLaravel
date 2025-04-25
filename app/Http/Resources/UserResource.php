@@ -17,8 +17,11 @@ class UserResource extends JsonResource
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email' => $this->email,
-                'roles' => $this->roles,
-                'tickets' => $this->tickets,
+                'roles' => $this->roles->pluck('name'),
+                'total_tickets' => $this->tickets()->count(),
+                'tickets' => $this->whenLoaded('tickets'),
+                'created_at' => $this->created_at?->diffForHumans(),
+                'updated_at' => $this->updated_at?->diffForHumans(),
             ];
         }
 

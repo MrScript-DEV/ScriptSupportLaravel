@@ -14,13 +14,15 @@ class TicketResource extends JsonResource
         if ($this->resource) {
             return [
                 'id' => $this->id,
-                'user' => $this->user,
-                'assignedTo' => $this->assignedTo,
                 'subject' => $this->subject,
-                'priority' => $this->priority,
-                'status' => $this->status,
-                'rating' => $this->rating,
-                'messages' => $this->messages,
+                'rating' => (int) $this->rating,
+                'user' => new UserResource($this->whenLoaded('user')),
+                'assigned_to' => new UserResource($this->whenLoaded('assignedTo')),
+                'priority' => $this->priority?->name,
+                'status' => $this->status?->name,
+                'messages' => MessageResource::collection($this->whenLoaded('messages')),
+                'created_at' => $this->created_at?->diffForHumans(),
+                'updated_at' => $this->updated_at?->diffForHumans(),
             ];
         }
 
