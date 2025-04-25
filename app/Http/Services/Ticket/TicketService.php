@@ -4,11 +4,13 @@ namespace App\Http\Services\Ticket;
 
 use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Collection;
-use App\Http\Services\Ticket\Actions\CreateTicketAction;
-use App\Http\Services\Ticket\Actions\FindAllTicketAction;
 use App\Http\Services\Ticket\Actions\FindTicketAction;
-use App\Http\Services\Ticket\Actions\UpdateRatingTicketAction;
+use App\Http\Services\Ticket\Actions\CreateTicketAction;
+use App\Http\Services\Ticket\Actions\DeleteTicketAction;
 use App\Http\Services\Ticket\Actions\UpdateTicketAction;
+use App\Http\Services\Ticket\Actions\DestroyTicketAction;
+use App\Http\Services\Ticket\Actions\FindAllTicketAction;
+use App\Http\Services\Ticket\Actions\UpdateRatingTicketAction;
 
 class TicketService
 {
@@ -18,6 +20,8 @@ class TicketService
         private FindTicketAction $findTicket,
         private UpdateTicketAction $updateTicket,
         private UpdateRatingTicketAction $updateRatingTicket,
+        private DeleteTicketAction $deleteTicket,
+        private DestroyTicketAction $destroyTicket,
     )
     {}
 
@@ -55,5 +59,15 @@ class TicketService
             id: $id,
             rating: $data['rating'],
         );
+    }
+
+    public function delete(int $id): void
+    {
+       $this->deleteTicket->execute(id: $id);
+    }
+
+    public function destroy(int $id): void
+    {
+       $this->destroyTicket->execute(id: $id);
     }
 }

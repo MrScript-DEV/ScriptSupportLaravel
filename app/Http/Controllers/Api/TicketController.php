@@ -73,4 +73,22 @@ class TicketController extends BaseController
             return $this->sendError(message: $e->getMessage(), code: $e->getCode() ?: 500);
         }
     }
+
+    public function delete(int $id): JsonResponse {
+        try {
+            $this->_ticketService->delete($id);
+            return $this->sendResponse(message:  __('OK'), code: 204);
+        } catch (\Exception $e) {
+            return $this->sendError(message: $e->getMessage(), code: $e->getCode() ?: 500);
+        }
+    }
+
+    public function destroy(int $id): JsonResponse {
+        try {
+            $this->_ticketService->destroy($id);
+            return $this->sendResponse(message:  __('OK'), code: 204);
+        } catch (\Exception $e) {
+            return $this->sendError(message: $e->getMessage(), code: $e->getCode() ?: 500);
+        }
+    }
 }
