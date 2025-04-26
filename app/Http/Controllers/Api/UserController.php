@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\UserResource;
 use App\Http\Services\User\UserService;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 

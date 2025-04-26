@@ -6,10 +6,11 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\TicketResource;
+use App\Http\Controllers\BaseController;
 use App\Http\Services\Ticket\TicketService;
 use App\Http\Requests\Ticket\TicketCreateRequest;
-use App\Http\Requests\Ticket\TicketUpdateRatingRequest;
 use App\Http\Requests\Ticket\TicketUpdateRequest;
+use App\Http\Requests\Ticket\TicketUpdateRatingRequest;
 
 class TicketController extends BaseController
 {
