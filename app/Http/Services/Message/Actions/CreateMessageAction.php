@@ -1,33 +1,27 @@
 <?php
 
-namespace App\Http\Services\Ticket\Actions;
+namespace App\Http\Services\Message\Actions;
 
-use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\Message;
-use App\Models\Priority;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
-class CreateTicketAction
+class CreateMessageAction
 {
     public function execute(
-        string $subject,
-        int $priorityId,
+        int $ticketId,
         string $messageContent,
-    ): Ticket
+    ): Message
     {
         DB::beginTransaction();
 
         try {
-            $ticket = new Ticket([
-                'subject' => $subject,
-            ]);
+            $ticket = Ticket::findOrFail($ticketId);
 
-            $ticket->user()->associate(authenticatedUser());
-            $ticket->priority()->associate(Priority::findOrFail($priorityId));
-            $ticket->status()->associate(Status::where('name', 'Ouvert')->firstOrFail());
-
-            $ticket->save();
+            if ($ticket->status->name === 'Fermé') {
+                abort(422, __("Impossible d'ajouter un message sur un ticket fermé."));
+            }
 
             $message = new Message([
                 'content' => $messageContent,
@@ -40,7 +34,7 @@ class CreateTicketAction
 
             DB::commit();
 
-            return $ticket;
+            return $message;
 
         } catch (\Throwable $e) {
             DB::rollBack();

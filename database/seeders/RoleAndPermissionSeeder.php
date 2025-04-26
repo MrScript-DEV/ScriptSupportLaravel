@@ -17,13 +17,13 @@ class RoleAndPermissionSeeder extends Seeder
             // Tickets
             'createTicket', 'viewAllTicket', 'editTicket', 'deleteTicket', 'destroyTicket',
             // Messages
-            'createMessage', 'viewAllMessage', 'editMessage', 'deleteMessage', 'destroyMessage',
+            'createMessage', 'editMessage', 'deleteMessage', 'destroyMessage',
             // Users
             'createUser', 'viewAllUser', 'editUser', 'deleteUser', 'destroyUser',
             // Priorities
-            'viewAllPriority', 'createPriority', 'editPriority', 'deletePriority', 'destroyPriority',
+            'viewAllPriority', 'createPriority', 'editPriority', 'deletePriority',
             // Statuses
-            'viewAllStatus', 'createStatus', 'editStatus', 'deleteStatus', 'destroyStatus',
+            'viewAllStatus', 'createStatus',
         ];
 
         foreach ($permissions as $permission) {
@@ -38,7 +38,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $supportRole->syncPermissions([
             'viewAllTicket', 'editTicket',
-            'viewAllMessage', 'createMessage',
+            'createMessage',
             'viewAllUser',
         ]);
 

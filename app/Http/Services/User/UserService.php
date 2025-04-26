@@ -10,6 +10,7 @@ use App\Http\Services\User\Actions\DeleteUserAction;
 use App\Http\Services\User\Actions\DestroyUserAction;
 use App\Http\Services\User\Actions\FindAllUserAction;
 use App\Http\Services\User\Actions\UpdateUserAction;
+use Illuminate\Http\Request;
 
 class UserService
 {
@@ -22,8 +23,8 @@ class UserService
         private DestroyUserAction $destroyUser,
     ) {}
 
-    public function findAll():Collection {
-        return $this->findAllUser->execute();
+    public function findAll(Request $request):Collection {
+        return $this->findAllUser->execute($request);
     }
 
     public function find(int $id): User {

@@ -3,6 +3,7 @@
 namespace App\Http\Services\Ticket;
 
 use App\Models\Ticket;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Services\Ticket\Actions\FindTicketAction;
 use App\Http\Services\Ticket\Actions\CreateTicketAction;
@@ -25,8 +26,8 @@ class TicketService
     )
     {}
 
-    public function findAll(): Collection {
-        return $this->findAllTicket->execute();
+    public function findAll(Request $request): Collection {
+        return $this->findAllTicket->execute($request);
     }
 
     public function find(int $id): Ticket {
@@ -38,7 +39,7 @@ class TicketService
         return $this->createTicket->execute(
             subject: $data['subject'],
             priorityId: $data['priority_id'],
-            message: $data['message'],
+            messageContent: $data['message'],
         );
     }
 

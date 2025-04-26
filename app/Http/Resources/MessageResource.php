@@ -16,7 +16,7 @@ class MessageResource extends JsonResource
                 'id' => $this->id,
                 'user' => $this->whenLoaded('user'),
                 'ticket' => $this->whenLoaded('ticket'),
-                'message' => $this->content,
+                'content' => $this->content,
                 'created_at' => $this->created_at?->diffForHumans(),
                 'updated_at' => $this->updated_at?->diffForHumans(),
             ];
