@@ -33,7 +33,7 @@ class TicketController extends BaseController
     public function show(int $id): JsonResponse {
         try {
             if (!authenticatedUser()->can('viewAllTicket') && !isTicketOwner($id)) {
-                abort(403, __('Accès interdit'));
+                abort(403, __('Access Denied'));
             }
 
             $ticket = $this->_ticketService->find($id);
@@ -55,7 +55,7 @@ class TicketController extends BaseController
     public function update(int $id, TicketUpdateRequest $request): JsonResponse {
         try {
             if (!authenticatedUser()->can('editTicket')) {
-                abort(403, __('Accès interdit'));
+                abort(403, __('Access Denied'));
             }
 
             $ticket = $this->_ticketService->update($id, $request->validated());
@@ -69,7 +69,7 @@ class TicketController extends BaseController
     {
         try {
             if (!isTicketOwner($id)) {
-                abort(403, __('Accès interdit'));
+                abort(403, __('Access Denied'));
             }
 
             $ticket = $this->_ticketService->updateRating($id, $request->validated());

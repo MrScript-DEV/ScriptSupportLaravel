@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (AccessDeniedHttpException $e, $request) {
             return response()->json([
                 'success' => false,
-                'message' => __('Accès interdit'),
+                'message' => __('Access Denied'),
             ], 403);
         });
     })->create();

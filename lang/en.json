@@ -1,0 +1,7 @@
+{
+    "(and :count more error)": "(and :count more error)",
+    "(and :count more errors)": "(and :count more errors)",
+    "OK": "OK",
+    "Access Denied": "Access Denied",
+    "Cannot add a message to a closed ticket": "Cannot add a message to a closed ticket"
+}

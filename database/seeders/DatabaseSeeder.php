@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
         ])->map(fn ($data) => Status::create($data));
 
         $priorities = collect([
-            ['name' => 'Faible', 'level' => 0],
-            ['name' => 'Moyenne', 'level' => 1],
-            ['name' => 'Élevée', 'level' => 2],
+            ['name' => 'Faible', 'level' => 1],
+            ['name' => 'Moyenne', 'level' => 2],
+            ['name' => 'Élevée', 'level' => 3],
         ])->map(fn ($data) => Priority::create($data));
 
         $this->call(RoleAndPermissionSeeder::class);

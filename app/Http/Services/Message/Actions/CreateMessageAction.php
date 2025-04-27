@@ -5,7 +5,6 @@ namespace App\Http\Services\Message\Actions;
 use App\Models\Ticket;
 use App\Models\Message;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 
 class CreateMessageAction
 {
@@ -20,7 +19,7 @@ class CreateMessageAction
             $ticket = Ticket::findOrFail($ticketId);
 
             if ($ticket->status->name === 'Fermé') {
-                abort(422, __("Impossible d'ajouter un message sur un ticket fermé."));
+                abort(422, __("Cannot add a message to a closed ticket"));
             }
 
             $message = new Message([

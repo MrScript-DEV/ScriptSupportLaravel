@@ -21,7 +21,7 @@ class MessageController extends BaseController
     public function create(MessageCreateRequest $request): JsonResponse {
         try {
             if (!authenticatedUser()->can('viewAllTicket') && !isTicketOwner((int) $request->validated()['ticket_id'])) {
-                abort(403, __('Accès interdit'));
+                abort(403, __('Access Denied'));
             }
 
             $message = $this->_messageService->create($request->validated());

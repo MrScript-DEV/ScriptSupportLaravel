@@ -32,7 +32,7 @@ class UserController extends BaseController
     public function show(int $id): JsonResponse {
         try {
             if (!authenticatedUser()->can('viewAllUser') && !isOwner($id)) {
-                abort(403, __('Accès interdit'));
+                abort(403, __('Access Denied'));
             }
 
             $user = $this->_userService->find($id);
@@ -54,7 +54,7 @@ class UserController extends BaseController
     public function update(int $id, UserUpdateRequest $request): JsonResponse {
         try {
             if (!authenticatedUser()->can('editUser') && !isOwner($id)) {
-                abort(403, __('Accès interdit'));
+                abort(403, __('Access Denied'));
             }
 
             $user = $this->_userService->update($id, $request->validated());
