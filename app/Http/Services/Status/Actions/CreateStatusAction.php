@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Status\Actions;
 
 use App\Models\Status;
@@ -9,8 +11,7 @@ class CreateStatusAction
 {
     public function execute(
         string $name,
-    ): Status
-    {
+    ): Status {
         DB::beginTransaction();
 
         try {
@@ -23,9 +24,9 @@ class CreateStatusAction
             DB::commit();
 
             return $status;
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

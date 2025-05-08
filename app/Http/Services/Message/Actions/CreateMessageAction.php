@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Message\Actions;
 
 use App\Models\Ticket;
@@ -11,15 +13,14 @@ class CreateMessageAction
     public function execute(
         int $ticketId,
         string $messageContent,
-    ): Message
-    {
+    ): Message {
         DB::beginTransaction();
 
         try {
             $ticket = Ticket::findOrFail($ticketId);
 
             if ($ticket->status->name === 'Fermé') {
-                abort(422, __("Cannot add a message to a closed ticket"));
+                abort(422, __('Cannot add a message to a closed ticket'));
             }
 
             $message = new Message([
@@ -34,9 +35,9 @@ class CreateMessageAction
             DB::commit();
 
             return $message;
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

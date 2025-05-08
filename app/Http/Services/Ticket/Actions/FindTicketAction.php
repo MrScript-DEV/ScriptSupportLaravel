@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Ticket\Actions;
 
 use App\Models\Ticket;
-use Illuminate\Database\Eloquent\Collection;
 
 class FindTicketAction
 {

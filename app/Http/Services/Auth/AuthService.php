@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Auth;
 
 use App\Http\Services\Auth\Actions\LoginUserAction;
@@ -13,7 +15,8 @@ class AuthService
         private RegisterUserAction $registerUser,
         private LoginUserAction $loginUser,
         private LogoutUserAction $logoutUser,
-    ) {}
+    ) {
+    }
 
     public function register(array $data): void
     {

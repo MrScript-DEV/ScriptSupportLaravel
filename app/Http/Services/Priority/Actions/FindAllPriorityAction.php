@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Priority\Actions;
 
 use App\Models\Priority;

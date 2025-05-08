@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Auth\Actions;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -12,8 +15,7 @@ class LoginUserAction
     public function execute(
         string $email,
         string $password,
-    ): array
-    {
+    ): array {
         DB::beginTransaction();
 
         try {
@@ -30,11 +32,12 @@ class LoginUserAction
             DB::commit();
 
             return [
-                'user' => $user,
+                'user' => new UserResource($user),
                 'token' => $token,
             ];
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

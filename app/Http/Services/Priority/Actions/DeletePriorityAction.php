@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Priority\Actions;
 
 use App\Models\Priority;
@@ -17,9 +19,9 @@ class DeletePriorityAction
             $priority->delete();
 
             DB::commit();
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

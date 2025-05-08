@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Enums\Role;
 use App\Models\User;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +18,7 @@ if (!function_exists('isAdmin')) {
     function isAdmin(): bool
     {
         $user = authenticatedUser();
+
         return $user?->hasRole('Admin') ?? false;
     }
 }
@@ -27,6 +27,7 @@ if (!function_exists('isSupport')) {
     function isSupport(): bool
     {
         $user = authenticatedUser();
+
         return $user?->hasRole('Support') ?? false;
     }
 }
@@ -35,6 +36,7 @@ if (!function_exists('isUser')) {
     function isUser(): bool
     {
         $user = authenticatedUser();
+
         return $user?->hasRole('User') ?? false;
     }
 }
@@ -44,6 +46,7 @@ if (!function_exists('isOwner')) {
     function isOwner(int $ownerId): bool
     {
         $user = authenticatedUser();
+
         return $user && $user->id === $ownerId;
     }
 }
@@ -78,6 +81,7 @@ if (!function_exists('hasAllPermissions')) {
     function hasAllPermissions(string ...$permissions): bool
     {
         $user = authenticatedUser();
+
         return $user?->hasAllPermissions($permissions) ?? false;
     }
 }
@@ -86,6 +90,7 @@ if (!function_exists('hasAnyPermission')) {
     function hasAnyPermission(string ...$permissions): bool
     {
         $user = authenticatedUser();
+
         return $user?->hasAnyPermission($permissions) ?? false;
     }
 }

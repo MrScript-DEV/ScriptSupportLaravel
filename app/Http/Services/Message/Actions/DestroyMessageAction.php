@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Message\Actions;
 
 use App\Models\Message;
@@ -17,9 +19,9 @@ class DestroyMessageAction
             $message->forceDelete();
 
             DB::commit();
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

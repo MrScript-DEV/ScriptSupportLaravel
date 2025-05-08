@@ -16,44 +16,53 @@ class MessageController extends BaseController
 {
     use HandlesApiException;
 
-    public function __construct(private MessageService $_messageService){}
+    public function __construct(private MessageService $_messageService)
+    {
+    }
 
-    public function create(MessageCreateRequest $request): JsonResponse {
+    public function create(MessageCreateRequest $request): JsonResponse
+    {
         try {
             if (!authenticatedUser()->can('viewAllTicket') && !isTicketOwner((int) $request->validated()['ticket_id'])) {
                 abort(403, __('Access Denied'));
             }
 
             $message = $this->_messageService->create($request->validated());
+
             return $this->sendResponse(message:  __('OK'), result: new MessageResource($message), code: 201);
-        }
-        catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             return $this->handleException($e);
         }
     }
 
-    public function update(int $id, MessageUpdateRequest $request): JsonResponse {
+    public function update(int $id, MessageUpdateRequest $request): JsonResponse
+    {
         try {
             $message = $this->_messageService->update($id, $request->validated());
+
             return $this->sendResponse(message:  __('OK'), result: new MessageResource($message), code: 200);
         } catch (\Throwable $e) {
             return $this->handleException($e);
         }
     }
 
-    public function delete(int $id): JsonResponse {
+    public function delete(int $id): JsonResponse
+    {
         try {
             $this->_messageService->delete($id);
-            return $this->sendResponse(message:  __('OK'), code: 204);
+
+            return $this->sendResponse(message:  __('OK'), code: 200);
         } catch (\Throwable $e) {
             return $this->handleException($e);
         }
     }
 
-    public function destroy(int $id): JsonResponse {
+    public function destroy(int $id): JsonResponse
+    {
         try {
             $this->_messageService->destroy($id);
-            return $this->sendResponse(message:  __('OK'), code: 204);
+
+            return $this->sendResponse(message:  __('OK'), code: 200);
         } catch (\Throwable $e) {
             return $this->handleException($e);
         }
