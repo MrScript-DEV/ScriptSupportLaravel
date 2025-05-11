@@ -10,7 +10,7 @@ class FindTicketAction
 {
     public function execute(int $id): Ticket
     {
-        $relations = ['assignedTo', 'user', 'messages'];
+        $relations = ['assignedTo', 'user', 'messages.user'];
 
         return Ticket::with($relations)->findOrFail($id);
     }

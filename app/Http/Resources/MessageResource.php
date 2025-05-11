@@ -14,7 +14,7 @@ class MessageResource extends JsonResource
         if ($this->resource) {
             return [
                 'id' => $this->id,
-                'user' => $this->whenLoaded('user'),
+                'user' => new UserResource($this->whenLoaded('user')),
                 'ticket' => $this->whenLoaded('ticket'),
                 'content' => $this->content,
                 'created_at' => $this->created_at,
