@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Ticket;
 
 use App\Models\Ticket;
@@ -23,14 +25,16 @@ class TicketService
         private UpdateRatingTicketAction $updateRatingTicket,
         private DeleteTicketAction $deleteTicket,
         private DestroyTicketAction $destroyTicket,
-    )
-    {}
+    ) {
+    }
 
-    public function findAll(Request $request): Collection {
+    public function findAll(Request $request): Collection
+    {
         return $this->findAllTicket->execute($request);
     }
 
-    public function find(int $id): Ticket {
+    public function find(int $id): Ticket
+    {
         return $this->findTicket->execute(id: $id);
     }
 
@@ -64,11 +68,11 @@ class TicketService
 
     public function delete(int $id): void
     {
-       $this->deleteTicket->execute(id: $id);
+        $this->deleteTicket->execute(id: $id);
     }
 
     public function destroy(int $id): void
     {
-       $this->destroyTicket->execute(id: $id);
+        $this->destroyTicket->execute(id: $id);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Status;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -14,14 +16,16 @@ class StatusService
         private CreateStatusAction $createStatus,
         private FindAllStatusAction $findAllStatus,
         private FindStatusAction $findStatus,
-    )
-    {}
+    ) {
+    }
 
-    public function findAll(): Collection {
+    public function findAll(): Collection
+    {
         return $this->findAllStatus->execute();
     }
 
-    public function find(int $id): Status {
+    public function find(int $id): Status
+    {
         return $this->findStatus->execute(id: $id);
     }
 

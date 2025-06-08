@@ -20,8 +20,8 @@ class UserResource extends JsonResource
                 'roles' => $this->roles->pluck('name'),
                 'total_tickets' => $this->tickets()->count(),
                 'tickets' => $this->whenLoaded('tickets'),
-                'created_at' => $this->created_at?->diffForHumans(),
-                'updated_at' => $this->updated_at?->diffForHumans(),
+                'created_at' => $this->created_at,
+                'updated_at' => $this->updated_at,
             ];
         }
 

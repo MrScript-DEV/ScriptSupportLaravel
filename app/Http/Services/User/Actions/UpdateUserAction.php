@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\User\Actions;
 
 use App\Models\User;
@@ -13,8 +15,7 @@ class UpdateUserAction
         string $lastname,
         string $email,
         string $role,
-    ): User
-    {
+    ): User {
         DB::beginTransaction();
 
         try {
@@ -25,13 +26,14 @@ class UpdateUserAction
                 'email' => $email,
             ]);
 
-            $user->assignRole($role);
+            $user->syncRoles([$role]);
 
             DB::commit();
-            return $user;
 
+            return $user;
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

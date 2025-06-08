@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\User\Actions;
 
 use App\Models\User;
@@ -23,9 +25,9 @@ class DeleteUserAction
             $user->delete();
 
             DB::commit();
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

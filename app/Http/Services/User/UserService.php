@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\User;
 
 use App\Models\User;
@@ -21,13 +23,16 @@ class UserService
         private UpdateUserAction $updateUser,
         private DeleteUserAction $deleteUser,
         private DestroyUserAction $destroyUser,
-    ) {}
+    ) {
+    }
 
-    public function findAll(Request $request):Collection {
+    public function findAll(Request $request): Collection
+    {
         return $this->findAllUser->execute($request);
     }
 
-    public function find(int $id): User {
+    public function find(int $id): User
+    {
         return $this->findUser->execute(id: $id);
     }
 
@@ -55,11 +60,11 @@ class UserService
 
     public function delete(int $id): void
     {
-       $this->deleteUser->execute(id: $id);
+        $this->deleteUser->execute(id: $id);
     }
 
     public function destroy(int $id): void
     {
-       $this->destroyUser->execute(id: $id);
+        $this->destroyUser->execute(id: $id);
     }
 }

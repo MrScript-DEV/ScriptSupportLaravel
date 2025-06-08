@@ -18,11 +18,11 @@ class TicketResource extends JsonResource
                 'rating' => (int) $this->rating,
                 'user' => new UserResource($this->whenLoaded('user')),
                 'assigned_to' => new UserResource($this->whenLoaded('assignedTo')),
-                'priority' => $this->priority?->name,
-                'status' => $this->status?->name,
+                'priority' => $this->priority,
+                'status' => $this->status,
                 'messages' => MessageResource::collection($this->whenLoaded('messages')),
-                'created_at' => $this->created_at?->diffForHumans(),
-                'updated_at' => $this->updated_at?->diffForHumans(),
+                'created_at' => $this->created_at,
+                'updated_at' => $this->updated_at,
             ];
         }
 

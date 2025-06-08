@@ -44,6 +44,7 @@ class RoleAndPermissionSeeder extends Seeder
         $userRole->syncPermissions([
             'createTicket',
             'createMessage',
+            'viewAllPriority',
         ]);
     }
 }

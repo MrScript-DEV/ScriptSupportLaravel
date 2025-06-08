@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Message;
 
 use App\Models\Message;
@@ -8,7 +10,6 @@ use App\Http\Services\Message\Actions\DeleteMessageAction;
 use App\Http\Services\Message\Actions\UpdateMessageAction;
 use App\Http\Services\Message\Actions\DestroyMessageAction;
 
-
 class MessageService
 {
     public function __construct(
@@ -16,8 +17,8 @@ class MessageService
         private UpdateMessageAction $updateMessage,
         private DeleteMessageAction $deleteMessage,
         private DestroyMessageAction $destroyMessage,
-    )
-    {}
+    ) {
+    }
 
     public function create(array $data): Message
     {
@@ -37,11 +38,11 @@ class MessageService
 
     public function delete(int $id): void
     {
-       $this->deleteMessage->execute(id: $id);
+        $this->deleteMessage->execute(id: $id);
     }
 
     public function destroy(int $id): void
     {
-       $this->destroyMessage->execute(id: $id);
+        $this->destroyMessage->execute(id: $id);
     }
 }

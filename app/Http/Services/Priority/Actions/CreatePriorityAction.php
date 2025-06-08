@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Priority\Actions;
 
 use App\Models\Priority;
@@ -10,8 +12,7 @@ class CreatePriorityAction
     public function execute(
         string $name,
         int $level,
-    ): Priority
-    {
+    ): Priority {
         DB::beginTransaction();
 
         try {
@@ -25,9 +26,9 @@ class CreatePriorityAction
             DB::commit();
 
             return $priority;
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

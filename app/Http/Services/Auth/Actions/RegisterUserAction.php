@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Auth\Actions;
 
 use App\Models\User;
@@ -13,24 +15,23 @@ class RegisterUserAction
         string $lastname,
         string $email,
         string $password,
-    ): void
-    {
+    ): void {
         DB::beginTransaction();
 
         try {
             $user = User::create([
                 'first_name' => $firstname,
-                'last_name'  => $lastname,
-                'email'      => $email,
-                'password'   => Hash::make($password),
+                'last_name' => $lastname,
+                'email' => $email,
+                'password' => Hash::make($password),
             ]);
 
             $user->assignRole('User');
 
             DB::commit();
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

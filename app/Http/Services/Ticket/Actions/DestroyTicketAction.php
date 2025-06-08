@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Ticket\Actions;
 
 use App\Models\Ticket;
@@ -19,9 +21,9 @@ class DestroyTicketAction
             $ticket->forceDelete();
 
             DB::commit();
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

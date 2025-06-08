@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Message\Actions;
 
 use App\Models\Message;
@@ -10,8 +12,7 @@ class UpdateMessageAction
     public function execute(
         int $id,
         string $messageContent,
-    ): Message
-    {
+    ): Message {
         DB::beginTransaction();
 
         try {
@@ -24,9 +25,9 @@ class UpdateMessageAction
             DB::commit();
 
             return $message;
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

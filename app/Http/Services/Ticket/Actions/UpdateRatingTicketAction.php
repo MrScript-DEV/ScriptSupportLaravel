@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Services\Ticket\Actions;
 
 use App\Models\Ticket;
@@ -10,8 +12,7 @@ class UpdateRatingTicketAction
     public function execute(
         int $id,
         string $rating,
-    ): Ticket
-    {
+    ): Ticket {
         DB::beginTransaction();
 
         try {
@@ -25,9 +26,9 @@ class UpdateRatingTicketAction
             DB::commit();
 
             return $ticket;
-
         } catch (\Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }
